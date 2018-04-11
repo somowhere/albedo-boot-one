@@ -1,0 +1,238 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                机构管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+<div class="m-content">
+    <div class="row">
+        <div class="col-xl-2">
+            <alb-tree-show id="org_" title="组织机构" [selectNodeId]="nodeId" url="{{ctx}}/dataSystem/org/findTreeData?all"
+            [clickNodeFn]="clickTreeNodeOrg" allowCancelSelect="true" [cancelClickNodeFn]="cancelClickNodeOrg" nodesLevel="1" >
+            </alb-tree-show>
+    </div>
+        <div class="col-xl-10">
+            <div class="m-portlet m-portlet--mobile">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                数据列表
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <a  *ngIf="this.principal.hasAnyAuthorityDirectOne('sys_org_edit')" href="javascript:void(0)" id="btn-edit-org" title="添加机构" data-modal-id="#org-edit-modal" [attr.data-url]="ctx+'/sys/org/formData?parentId='+nodeId"
+                           class="m-portlet__nav-link btn btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill dialog-edit">
+                            <i class="la la-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <!--begin: Search Form -->
+                    <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 search-form" id="org-search-form">
+                        <input id="parentId" name="parentId" type="hidden" operate="eq" searchItem="searchItem" value="{{nodeId}}"/>
+                        <div class="row align-items-center">
+                            <div class="col-xl-8 order-2 order-xl-1">
+                                <div class="form-group m-form__group row align-items-center">
+                                    <div class="col-md-4">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__label">
+                                                <label class="m-label m-label--single">
+                                                    状态:
+                                                </label>
+                                            </div>
+                                            <div class="m-form__control">
+                                                <alb-form boxType="checkbox"
+                                                          id="status"
+                                                          name="status"
+                                                          operate="in"
+                                                          dictCode="sys_status"
+                                                          searchItem="searchItem" >
+                                                </alb-form>
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__label">
+                                                <label class="m-label m-label--single">
+                                                    机构名称:
+                                                </label>
+                                            </div>
+                                            <div class="m-form__control">
+                                                <input type="text" name="name" searchItem="searchItem" class="form-control m-input" />
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                <button id="table-form-search-org" class="btn m-btn--pill m-btn--air btn-primary btn-sm m-btn m-btn--custom search-form-btn filter-submit-table-org" type="button">
+                                    查询
+                                </button>
+                                <div class="m-separator m-separator--dashed d-xl-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end: Search Form -->  		<!--begin: Datatable -->
+                    <div class="m_datatable" id="data-table-org"></div>
+                    <!--end: Datatable -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--begin::Modal-->
+    <div id="org-edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                       添加组织
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">
+							&times;
+						</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="m-scrollable" data-scrollbar-shown="true" data-scrollable="true" data-max-height="500">
+                    <!--begin::Form-->
+                    <form class="m-form m-form--fit m-form--label-align-right form-validation" action="{{ctx}}/sys/org/" method="post" id="org-save-form">
+                        <input type="hidden" name="id" value="{{org.id}}" />
+                        <div class="m-portlet__body">
+                            <div class="m-form__content bootstrap-alerts">
+
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    上级组织 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <alb-tree-select id="org"
+                                                     cssClass="required" allowClear="true" name="parentId"
+                                                     value="{{org.parentId}}" labelName="parentName"
+                                                     labelValue="{{org.parentName}}" title="上级组织"
+                                                     url="{{ctx}}/dataSystem/org/findTreeData" ></alb-tree-select>
+
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    名称 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" name="name" value="{{org.name}}"
+                                           maxlength="64" class="form-control required"/>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    编码 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" name="code" value="{{org.code}}"
+                                           maxlength="64" class="form-control required"/>
+                                    <span class="m-form__help">
+							唯一
+						</span>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    类型 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <alb-form boxType="radio"
+                                              id="type"
+                                              name="type"
+                                              dictCode="sys_org_type"
+                                              value="{{org.type}}" cssClass="required">
+                                    </alb-form>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    等级 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <alb-form boxType="select"
+                                              id="grade"
+                                              name="grade"
+                                              dictCode="sys_org_grade"
+                                              value="{{org.type}}" cssClass="required">
+                                    </alb-form>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    序号 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" name="sort" value="{{org.sort}}"
+                                           maxlength="11" class="form-control digits"/>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    状态 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <alb-form boxType="radio"
+                                              id="status"
+                                              name="status"
+                                              dictCode="sys_status"
+                                              value="{{org.status}}" cssClass="required">
+                                    </alb-form>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    描述
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                         <textarea class="summernote form-control" name="description"
+                                   rows="1">{{org.description}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!--end::Form-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="albedoForm.resetForm('#org-save-form')">
+                        重置
+                    </button>
+                    <button type="button" class="btn btn-primary save" data-is-modal="true" data-table-id="#data-table-org">
+                        确认
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal-->
+
+</div>

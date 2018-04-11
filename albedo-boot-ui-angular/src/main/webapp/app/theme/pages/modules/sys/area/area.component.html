@@ -1,0 +1,229 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                区域管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+<div class="m-content">
+    <div class="row">
+        <div class="col-xl-2">
+            <alb-tree-show id="area_" title="区域树" [selectNodeId]="nodeId" url="{{ctx}}/sys/area/findTreeData?all"
+            [clickNodeFn]="clickTreeNodeArea" allowCancelSelect="true" [cancelClickNodeFn]="cancelClickNodeArea" nodesLevel="1" >
+            </alb-tree-show>
+    </div>
+        <div class="col-xl-10">
+            <div class="m-portlet m-portlet--mobile">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                数据列表
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="m-portlet__head-tools">
+                        <a *ngIf="this.principal.hasAnyAuthorityDirectOne('sys_area_edit')" href="javascript:void(0)" data-modal-id="#area-edit-modal" id="btn-edit-area" title="添加区域"
+                           class="m-portlet__nav-link btn btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill dialog-add">
+                            <i class="la la-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <!--begin: Search Form -->
+                    <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 search-form" id="area-search-form">
+                        <input id="parentId" name="parentId" type="hidden" operate="eq" searchItem="searchItem" value="{{nodeId}}"/>
+                        <div class="row align-items-center">
+                            <div class="col-xl-8 order-2 order-xl-1">
+                                <div class="form-group m-form__group row align-items-center">
+                                    <div class="col-md-4 m--margin-bottom-20">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__label">
+                                                <label class="m-label m-label--single">
+                                                    区域名称
+                                                </label>
+                                            </div>
+                                            <div class="m-form__control">
+                                                <input type="text" class="form-control m-input" searchItem="searchItem" id="name" name="name" operate="like" htmlEscape="false" maxlength="32" placeholder="..." />
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
+                                    <div class="col-md-4 m--margin-bottom-20">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__label">
+                                                <label class="m-label m-label--single">
+                                                    区域等级
+                                                </label>
+                                            </div>
+                                            <div class="m-form__control">
+                                                <alb-form name="level" searchItem="searchItem" dictCode="sys_area_type" boxType="select" operate="eq" attrType="Long"> </alb-form>
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
+                                    <div class="col-md-4 m--margin-bottom-20">
+                                        <div class="m-form__group m-form__group--inline">
+                                            <div class="m-form__label">
+                                                <label class="m-label m-label--single">
+                                                    区域编码
+                                                </label>
+                                            </div>
+                                            <div class="m-form__control">
+                                                <input type="text" class="form-control m-input" searchItem="searchItem" id="code" name="code" operate="like" htmlEscape="false" maxlength="32" placeholder="..." />
+                                            </div>
+                                        </div>
+                                        <div class="d-md-none m--margin-bottom-10"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                <button id="table-form-search-area" class="btn m-btn--pill m-btn--air btn-primary btn-sm m-btn m-btn--custom search-form-btn filter-submit-table-area" type="button">
+                                    查询
+                                </button>
+                                <div class="m-separator m-separator--dashed d-xl-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end: Search Form -->  		<!--begin: Datatable -->
+                    <div class="m_datatable" id="data-table-area"></div>
+                    <!--end: Datatable -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--begin::Modal-->
+    <div id="area-edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                       添加区域
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">
+							&times;
+						</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="m-scrollable" data-scrollbar-shown="true" data-scrollable="true" data-max-height="500">
+                    <!--begin::Form-->
+                    <form class="m-form m-form--fit m-form--label-align-right form-validation" action="{{ctx}}/sys/area/" method="post" id="area-save-form">
+                        <input type="hidden" name="id" value="{{area.id}}" />
+                        <div class="m-portlet__body">
+                            <div class="m-form__content bootstrap-alerts">
+
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">上级区域<span class="required">*</span>
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <alb-tree-select id="area" cssClass="required" allowClear="true" name="parentId" value="{{area.parentId}}" labelName="parentName"
+                                    labelValue="{{area.parentName}}" title="选择上级区域" url="{{ctx}}/sys/area/findTreeData"> </alb-tree-select>
+                                    <span class="m-form__help">
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    区域名称
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" name="name" id="name" class="form-control" value="{{area.name}}" htmlEscape="false" maxlength="32">
+                                <span class="m-form__help">
+
+                                </span>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    区域简称
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" name="shortName" id="shortName" class="form-control" value="{{area.shortName}}" htmlEscape="false" maxlength="32">
+                                <span class="m-form__help">
+
+                                </span>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    序号 *
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" name="sort" id="sort" class="form-control required digits" value="{{area.sort}}" htmlEscape="false" maxlength="11">
+                                <span class="m-form__help">
+
+                                </span>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    区域等级
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <alb-form name="level" dictCode="sys_area_type" cssClass="" boxType="select" value="{{area.level}}" > </alb-form>
+                                <span class="m-form__help">
+                                    (1省/2市/3区县)
+                                </span>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    区域编码
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" name="code" id="code" class="form-control" value="{{area.code}}" htmlEscape="false" maxlength="32">
+                                <span class="m-form__help">
+
+                                </span>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <label class="col-form-label col-lg-2 col-sm-12">
+                                    描述
+                                </label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <textarea name="description" rows="5" maxlength="225" class="form-control input-xxlarge ">{{area.description }}</textarea>
+                                <span class="m-form__help">
+
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!--end::Form-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="albedoForm.resetForm('#area-save-form')">
+                        重置
+                    </button>
+                    <button type="button" class="btn btn-primary save" data-is-modal="true" data-table-id="#data-table-area">
+                        确认
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal-->
+</div>

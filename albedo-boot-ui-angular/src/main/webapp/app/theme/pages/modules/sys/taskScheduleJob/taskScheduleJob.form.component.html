@@ -1,0 +1,183 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                任务调度管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+
+<div class="m-content">
+    <!--begin::Portlet-->
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        添加任务调度
+                        <small>
+                            数据表单
+                        </small>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <a href="#/sys/taskScheduleJob/list" title="任务调度列表" class="m-portlet__nav-link btn list btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill ">
+                    <i class="la la-th-list"></i>
+                </a>
+            </div>
+        </div>
+        <!--begin::Form-->
+        <form class="m-form m-form--fit m-form--label-align-right form-validation" action="{{ctx}}/sys/taskScheduleJob/" method="post" id="taskScheduleJob-save-form">
+            <input type="hidden" name="id" value="{{taskScheduleJob.id}}" />
+            <div class="m-portlet__body">
+                <div class="m-form__content bootstrap-alerts">
+
+                </div>
+
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        名称
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="name" id="name" class="form-control required" value="{{taskScheduleJob.name}}" htmlEscape="false" maxlength="255">
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        分组
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="group" id="group" class="form-control" value="{{taskScheduleJob.group}}" htmlEscape="false" maxlength="255">
+                        <span class="m-form__help"> 名称和分组不能同时重复</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        是否启动 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="radio"
+                                  id="jobStatus"
+                                  name="jobStatus"
+                                  dictCode="sys_yes_no"
+                                  value="{{taskScheduleJob.jobStatus}}" cssClass="required">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        cron表达式 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="cronExpression" id="cronExpression" class="form-control required" value="{{taskScheduleJob.cronExpression}}" htmlEscape="false" maxlength="255">
+                        <span class="m-form__help">每隔5秒执行一次：*/5 * * * * ?</span>
+                        <span class="m-form__help">每隔1分钟执行一次：0 */1 * * * ?</span>
+                        <span class="m-form__help"> 每天23点执行一次：0 0 23 * * ?</span>
+                        <span class="m-form__help">每天凌晨1点执行一次：0 0 1 * * ?</span>
+                        <span class="m-form__help"> 每月1号凌晨1点执行一次：0 0 1 1 * ?</span>
+                        <span class="m-form__help">每月最后一天23点执行一次：0 0 23 L * ?</span>
+                        <span class="m-form__help">每周星期天凌晨1点实行一次：0 0 1 ? * L</span>
+                        <span class="m-form__help">在26分、29分、33分执行一次：0 26,29,33 * * * ?</span>
+                        <span class="m-form__help">每天的0点、13点、18点、21点都执行一次：0 0 0,13,18,21 * * ?</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        包名+类名
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="beanClass" id="beanClass" class="form-control" value="{{taskScheduleJob.beanClass}}" htmlEscape="false" maxlength="255">
+                        <span class="m-form__help">任务执行时调用哪个类的方法</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        是否当前任务
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="radio"
+                                  id="isConcurrent"
+                                  name="isConcurrent"
+                                  dictCode="sys_yes_no"
+                                  value="{{taskScheduleJob.isConcurrent}}" cssClass="required">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        spring bean
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="springId" id="springId" class="form-control" value="{{taskScheduleJob.springId}}" htmlEscape="false" maxlength="255" />
+                        <label class="m-form__help"> spring bean 和 调用类名必填一项</label>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        任务调用的方法名 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="methodName" id="methodName" class="form-control required" value="{{taskScheduleJob.methodName}}" htmlEscape="false" maxlength="255" />
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        方法参数
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <textarea class="form-control" name="methodParams" rows="5" maxlength="255">{{taskScheduleJob.methodParams}}</textarea>
+                        <span class="m-form__help">单个 &#123;value:'test',attrType:'String',format:''&#125; 多个加[] json 语法</span>
+                        <span class="m-form__help">value 参数值 attrType 参数类型 Integer Long Short Float Double Date format当类型为Date 时有效</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        source_id
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="sourceId" id="sourceId" class="form-control" value="{{taskScheduleJob.sourceId}}" htmlEscape="false" maxlength="32" />
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        描述
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <textarea name="description" rows="5" maxlength="255" class="form-control input-xxlarge ">{{taskScheduleJob.description}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-success save">
+                                <i class="fa fa-check"></i> 保存
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="albedoForm.resetForm('#taskScheduleJob-save-form')">
+                                重置
+                            </button>
+                            <button type="button" class="btn" onclick="window.history.back()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Portlet-->
+</div>

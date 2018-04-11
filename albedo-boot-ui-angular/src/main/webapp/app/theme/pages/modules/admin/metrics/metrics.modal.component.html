@@ -1,0 +1,56 @@
+<!-- Modal used to display the threads dump -->
+<div class="modal-header">
+    <h4 class="modal-title">线程转储</h4>
+    <button type="button" class="close" (click)="activeModal.dismiss('closed')">&times;</button>
+</div>
+<div class="modal-body">
+    <span class="badge hand badge-primary" (click)="threadDumpFilter = {}">All&nbsp;<span class="badge badge-pill badge-default">{{threadDumpAll}}</span></span>&nbsp;
+    <span class="badge hand badge-success" (click)="threadDumpFilter = {threadState: 'RUNNABLE'}">Runnable&nbsp;<span class="badge badge-pill badge-default">{{threadDumpRunnable}}</span></span>&nbsp;
+    <span class="badge hand badge-info" (click)="threadDumpFilter = {threadState: 'WAITING'}">Waiting&nbsp;<span class="badge badge-pill badge-default">{{threadDumpWaiting}}</span></span>&nbsp;
+    <span class="badge hand badge-warning" (click)="threadDumpFilter = {threadState: 'TIMED_WAITING'}">Timed Waiting&nbsp;<span class="badge badge-pill badge-default">{{threadDumpTimedWaiting}}</span></span>&nbsp;
+    <span class="badge hand badge-danger" (click)="threadDumpFilter = {threadState: 'BLOCKED'}">Blocked&nbsp;<span class="badge badge-pill badge-default">{{threadDumpBlocked}}</span></span>&nbsp;
+    <div class="mt-2">&nbsp;</div>
+    Filter
+    <input type="text" [(ngModel)]="threadDumpFilter" class="form-control">
+    <div class="pad" *ngFor="let entry of threadDump | pureFilter:threadDumpFilter:'lockName' | keys">
+        <h6>
+            <span class="badge" [ngClass]="getBadgeClass(entry.value.threadState)">{{entry.value.threadState}}</span>&nbsp;{{entry.value.threadName}} (ID {{entry.value.threadId}})
+            <a (click)="entry.show = !entry.show" href="javascript:void(0);">
+               <span [hidden]="entry.show">显示堆栈跟踪</span>
+               <span [hidden]="!entry.show">隐藏堆栈跟踪</span>
+            </a>
+        </h6>
+        <div class="card" [hidden]="!entry.show">
+            <div class="card-body">
+                <div *ngFor="let st of entry.value.stackTrace | keys" class="break">
+                    <samp>{{st.value.className}}.{{st.value.methodName}}(<code>{{st.value.fileName}}:{{st.value.lineNumber}}</code>)</samp>
+                    <span class="mt-1"></span>
+                </div>
+            </div>
+        </div>
+        <table class="table m-table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-right">阻塞时间</th>
+                    <th class="text-right">阻塞次数</th>
+                    <th class="text-right">等待时间</th>
+                    <th class="text-right">等待次数</th>
+                    <th>锁名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{entry.value.blockedTime}}</td>
+                    <td>{{entry.value.blockedCount}}</td>
+                    <td>{{entry.value.waitedTime}}</td>
+                    <td>{{entry.value.waitedCount}}</td>
+                    <td><code>{{entry.value.lockName}}</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary float-left" data-dismiss="modal" (click)="activeModal.dismiss('closed')">Done</button>
+</div>

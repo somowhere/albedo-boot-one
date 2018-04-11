@@ -1,0 +1,22 @@
+{
+    "/api": {
+        "target": "http://localhost:8066",
+        "secure": false
+    },
+    "/management": {
+        "target": "http://localhost:8066",
+        "secure": false
+    },
+    "/swagger": {
+        "target": "http://localhost:8066",
+        "secure": false
+    },
+    "/v2": {
+        "target": "http://localhost:8066",
+        "secure": false
+    }
+
+
+
+
+}

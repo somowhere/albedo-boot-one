@@ -1,0 +1,63 @@
+<div class="m-portlet m-portlet--mobile {{id}}-portlet">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">
+                    {{title}}
+                </h3>
+            </div>
+            <!--<div class="portlet-input input-inline" style="width: 195px !important;">-->
+            <!--<div class="input-icon right">-->
+            <!--<i class="icon-magnifier"></i>-->
+            <!--<input type="text" id="key" name="key" maxlength="50" class="form-control input-circle tree-search-input" placeholder="search..."> </div>-->
+            <!--</div>-->
+        </div>
+        <div class="m-portlet__head-tools">
+            <a href="javascript:void(0)" class="tree-search" title="搜索"><i class="fa fa-search"></i></a>
+            <a href="javascript:void(0)" class="tree-refresh" title="刷新"><i class="fa fa-refresh"></i></a>
+            <a href="javascript:void(0)" id="expand_tree_{{id}}" expand="true" title="展开/折叠" class="tree-expand"><i class="fa fa-expand"></i></a>
+
+
+            <!--<a routerLink="/sys/org/form/" title="添加机构" class="m-portlet__nav-link btn btn-lg btn-outline-primary m-btn m-btn&#45;&#45;outline-1x m-btn&#45;&#45;air m-btn&#45;&#45;icon m-btn&#45;&#45;icon-only m-btn&#45;&#45;pill ">-->
+            <!--<i class="la la-plus"></i>-->
+            <!--</a>-->
+        </div>
+    </div>
+    <div class="m-portlet__body  scroller albedo-treeSelect-div">
+        <div class="control-group tree-search-div" style="display: none; padding-bottom: 5px;">
+            <div class="portlet-input input-inline">
+                <div class="input-group">
+                    <input id="key" name="key" class="form-control input-circle tree-search-input"
+                           placeholder="请输入..." type="text">
+                    <span class="input-group-btn">
+							<button class="btn btn-secondary btn-search" type="button">
+								查询
+							</button>
+						</span>
+                </div>
+            </div>
+        </div>
+        <div class="ztree ztree-show scrollable" style="height:600px;"
+             id="tree-div-{{id}}"
+             [attr._checked]="checked"
+             [attr._url]="url"
+             [attr._checkNodeFn]="checkNodeFn"
+             [attr._beforeCheckNodeFn]="beforeCheckNodeFn"
+             [attr._cancelClickNodeFn]="cancelClickNodeFn"
+             [attr._clickNodeFn]="clickNodeFn"
+             [attr._afterLoadNodeFn]="afterLoadNodeFn"
+             [attr._nodesLevel]="nodesLevel"
+             [attr._selectedValueFn]="selectedValueFn"
+             [attr._selectNodeId]="selectNodeId"
+             [attr._notAllowSelectRoot]="notAllowSelectRoot"
+             [attr._notAllowSelectParent]="notAllowSelectParent"
+             [attr._notAllowSelect]="notAllowSelect"
+             [attr._allowCancelSelect]="allowCancelSelect"
+             [attr._checkShowInputId]="checkShowInputId"
+             [attr._checkIdInputName]="checkIdInputName"
+             [attr._onlyCheckedProperty]="onlyCheckedProperty"
+             [attr._onlyCheckedChild]="onlyCheckedChild"></div>
+    </div>
+</div>
+
+

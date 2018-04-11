@@ -1,0 +1,134 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                方案配置管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+<div class="m-content">
+
+	<div class="m-portlet m-portlet--mobile">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						数据列表
+					</h3>
+				</div>
+			</div>
+            <div class="m-portlet__head-tools">
+                <a *ngIf="this.principal.hasAnyAuthorityDirectOne('gen_genScheme_edit')" routerLink="/gen/genScheme/form/" title="添加方案配置" class="m-portlet__nav-link btn btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill btn-add-genScheme">
+                    <i class="la la-plus"></i>
+                </a>
+            </div>
+		</div>
+		<div class="m-portlet__body">
+			<!--begin: Search Form -->
+			<div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 search-form" id="genScheme-search-form">
+				<div class="row align-items-center">
+					<div class="col-xl-8 order-2 order-xl-1">
+						<div class="form-group m-form__group row align-items-center">
+							<div class="col-md-4 m--margin-bottom-20">
+								<div class="m-form__group m-form__group--inline">
+									<div class="m-form__label">
+										<label class="m-label m-label--single">
+                                            名称:
+										</label>
+									</div>
+									<div class="m-form__control">
+                                        <input type="text" name="name" searchItem="searchItem" class="form-control m-input" />
+									</div>
+								</div>
+								<div class="d-md-none m--margin-bottom-10"></div>
+							</div>
+                            <div class="col-md-4 m--margin-bottom-20">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        <label class="m-label m-label--single">
+                                            表名:
+                                        </label>
+                                    </div>
+                                    <div class="m-form__control">
+                                        <input type="text" name="genTableName" searchItem="searchItem" class="form-control m-input" />
+                                    </div>
+                                </div>
+                                <div class="d-md-none m--margin-bottom-10"></div>
+                            </div>
+                            <div class="col-md-4 m--margin-bottom-20">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        <label class="m-label m-label--single">
+                                            功能名称:
+                                        </label>
+                                    </div>
+                                    <div class="m-form__control">
+                                        <input type="text" name="functionName" searchItem="searchItem" class="form-control m-input" />
+                                    </div>
+                                </div>
+                                <div class="d-md-none m--margin-bottom-10"></div>
+                            </div>
+                            <div class="col-md-4 m--margin-bottom-20">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        <label class="m-label m-label--single">
+                                            功能作者:
+                                        </label>
+                                    </div>
+                                    <div class="m-form__control">
+                                        <input type="text" name="functionAuthor" searchItem="searchItem" class="form-control m-input" />
+                                    </div>
+                                </div>
+                                <div class="d-md-none m--margin-bottom-10"></div>
+                            </div>
+                            <div class="col-md-4 m--margin-bottom-20">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        <label class="m-label m-label--single">
+                                            状态:
+                                        </label>
+                                    </div>
+                                    <div class="m-form__control">
+                                        <alb-form boxType="checkbox"
+                                                  id="status"
+                                                  name="status"
+                                                  operate="in"
+                                                  dictCode="sys_status"
+                                                  searchItem="searchItem" >
+                                        </alb-form>
+                                    </div>
+                                </div>
+                                <div class="d-md-none m--margin-bottom-10"></div>
+                            </div>
+						</div>
+					</div>
+					<div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                        <button id="table-form-search-genScheme" class="btn m-btn--pill m-btn--air btn-primary btn-sm m-btn m-btn--custom search-form-btn filter-submit-table-genScheme" type="button">
+                            查询
+                        </button>
+						<div class="m-separator m-separator--dashed d-xl-none"></div>
+					</div>
+				</div>
+			</div>
+			<!--end: Search Form -->  		<!--begin: Datatable -->
+			<div class="m_datatable" id="data-table-genScheme"></div>
+			<!--end: Datatable -->
+		</div>
+
+	</div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+</div>
+

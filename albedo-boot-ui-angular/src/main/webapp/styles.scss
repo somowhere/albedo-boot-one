@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+.m-label--single {
+    white-space: nowrap;
+}
+
+.page-form,.page-list,.page {
+    width: 100%;
+}
+
+.hide {display: none;}
+
+.modal-xxxlg {
+    max-width: 90%;
+}
+.ico-select-div .m-demo-icon:hover{
+    cursor: pointer;
+}
+
+.ico-select-div .active{
+    color: #716aca !important;
+}
+
+.hand {
+    cursor: pointer;
+}
+
+.break {
+    white-space: normal;
+    word-break: break-all;
+}

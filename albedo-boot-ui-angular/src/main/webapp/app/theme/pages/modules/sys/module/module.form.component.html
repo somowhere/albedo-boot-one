@@ -1,0 +1,198 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                模块管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+
+<div class="m-content">
+    <!--begin::Portlet-->
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        添加模块
+                        <small>
+                            数据表单
+                        </small>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <a href="#/sys/module/list" title="模块列表" class="m-portlet__nav-link btn list btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill ">
+                    <i class="la la-th-list"></i>
+                </a>
+            </div>
+        </div>
+        <!--begin::Form-->
+        <form class="m-form m-form--fit m-form--label-align-right form-validation" action="{{ctx}}/sys/module/" method="post" id="module-save-form">
+            <input type="hidden" name="id" value="{{module.id}}" />
+            <div class="m-portlet__body">
+                <div class="m-form__content bootstrap-alerts">
+
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        上级模块 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-tree-select id="modular"
+                                         cssClass="required" allowClear="true" name="parentId"
+                                         value="{{module.parentId}}" labelName="parentName"
+                                         labelValue="{{module.parentName}}" title="上级组织"
+                                         url="{{ctx}}/dataSystem/module/findTreeData" ></alb-tree-select>
+
+                    </div>
+                </div>
+
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        名称 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="name" value="{{module.name}}"
+                               maxlength="64" class="form-control required"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        服务名称
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="microservice" value="{{module.microservice}}"
+                               maxlength="64" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        图标
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-ico-show  id="iconCls"
+                                       cssClass="required" allowClear="true" name="iconCls"
+                                       value="{{module.iconCls}}" title="选择图标"></alb-ico-show>
+                    </div>
+                    <span class="m-form__help">
+                    </span>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        类型 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="radio"
+                                  id="type"
+                                  name="type"
+                                  dictCode="sys_module_type"
+                                  value="{{module.type}}" cssClass="required">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        权限 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="permission" value="{{module.permission}}"
+                               maxlength="200" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row permission_item {{module.type=='1'? 'hide':''}}">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        请求方法 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="checkbox"
+                                  id="requestMethod"
+                                  name="requestMethod"
+                                  dictCode="sys_request_method"
+                                  value="{{module.requestMethod}}" cssClass="">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        操作目标
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="target" value="{{module.target}}"
+                               maxlength="64" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        链接
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="url" value="{{module.url}}"
+                               maxlength="64" class="form-control "/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        序号 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="sort" value="{{module.sort}}"
+                               maxlength="11" class="form-control digits"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        状态 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="radio"
+                                  id="status"
+                                  name="status"
+                                  dictCode="sys_status"
+                                  value="{{module.status}}" cssClass="required">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        描述
+                    </label>
+                    <div class="col-lg-9 col-md-9 col-sm-12">
+                         <textarea class="summernote form-control" name="description"
+                                   rows="5">{{module.description}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-success save">
+                                <i class="fa fa-check"></i> 保存
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="albedoForm.resetForm('#module-save-form')">
+                                重置
+                            </button>
+                            <button type="button" class="btn" onclick="window.history.back()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Portlet-->
+</div>

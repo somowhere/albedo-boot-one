@@ -1,0 +1,62 @@
+<!-- BEGIN: Left Aside -->
+<button class="m-aside-left-close  m-aside-left-close--skin-dark" id="m_aside_left_close_btn" appunwraptag="">
+	<i class="la la-close"></i>
+</button>
+<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark">
+	<!-- BEGIN: Aside Menu -->
+	<div  id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark"  		data-menu-vertical="true" 		 data-menu-scrollable="false" data-menu-dropdown-timeout="500"   		>Z
+        <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow">
+            <li *ngFor="let menuParent of menusData;"
+                class="{{menuParent.menuTop && menuParent.href=='' ? 'm-menu__section':'m-menu__item'}}
+                        {{!menuParent.menuTop && !menuParent.menuLeaf ? 'm-menu__item--submenu' : ''}}"
+                [attr.routerLinkActive]="!(menuParent.menuTop && menuParent.href=='') ? 'm-menu__item--active' : ''"
+                [attr.routerLinkActiveOptions]="!(menuParent.menuTop && menuParent.href=='') ? '{ exact: true }' : ''"
+                [attr.aria-haspopup]="!(!(menuParent.menuTop && menuParent.href==''))? 'true' : ''"
+                [attr.data-menu-submenu-toggle]="!menuParent.menuTop && !menuParent.menuLeaf ? 'hover' : ''"
+                [attr.href-name]="menuParent.href"
+            >
+                <h4 *ngIf="menuParent.menuTop && menuParent.href==''" class="m-menu__section-text">
+                    {{menuParent.name}}
+                </h4>
+                <i *ngIf="menuParent.menuTop && menuParent.href==''" class="m-menu__section-icon flaticon-more-v3"></i>
+
+                <a *ngIf="menuParent.href!='' && menuParent.menuLeaf"
+                   routerLink="{{menuParent.href}}" class="m-menu__link">
+                    <i class="m-menu__link-icon fa {{menuParent.iconCls}}"></i>
+                    <span class="m-menu__link-text">
+                        {{menuParent.name}}
+                    </span>
+                </a>
+                <a *ngIf="!menuParent.menuTop && !menuParent.menuLeaf" href="#"
+                   class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon fa {{menuParent.iconCls}}">
+                        <span></span>
+                    </i>
+                    <span class="m-menu__link-text">
+									{{menuParent.name}}
+								</span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                </a>
+                <div *ngIf="menuParent.childMenus!=null" class="m-menu__submenu">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li *ngFor="let menu of menuParent.childMenus;" [attr.href-name]="menu.href" class="m-menu__item" routerLinkActiveOptions="{ exact: true }"  aria-haspopup="true" >
+                            <a  routerLink="{{menu.href}}" class="m-menu__link">
+                                <i class="m-menu__link-icon fa {{menu.iconCls}}">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+									{{menu.name}}
+								</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </li>
+
+        </ul>
+	</div>
+	<!-- END: Aside Menu -->
+</div>
+<!-- END: Left Aside -->

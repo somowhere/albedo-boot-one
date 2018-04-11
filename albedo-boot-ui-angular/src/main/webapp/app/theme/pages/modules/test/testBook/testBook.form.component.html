@@ -1,0 +1,198 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                测试书籍管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+
+<div class="m-content">
+    <!--begin::Portlet-->
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        添加测试书籍
+                        <small>
+                            数据表单
+                        </small>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <a href="#/test/testBook/list" id="btn-list-testBook" title="测试书籍"
+                   class="m-portlet__nav-link btn list btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill ">
+                    <i class="la la-plus"></i>
+                </a>
+            </div>
+        </div>
+        <!--begin::Form-->
+        <form class="m-form m-form--fit m-form--label-align-right form-validation" action="{{ctx}}/test/testBook/" method="post" id="testBook-save-form">
+            <input type="hidden" name="id" value="{{testBook.id}}" />
+            <div class="m-portlet__body">
+                <div class="m-form__content bootstrap-alerts">
+
+                </div>
+
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        标题
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="title" id="title" class="form-control" value="{{testBook.title}}" htmlEscape="false" maxlength="32" />
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        作者 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="author" id="author" class="form-control required" value="{{testBook.author}}" htmlEscape="false" maxlength="50" />
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        名称
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="name" id="name" class="form-control" value="{{testBook.name}}" htmlEscape="false" maxlength="50" />
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        邮箱
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="email" id="email" class="form-control" value="{{testBook.email}}" htmlEscape="false" maxlength="100" />
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        手机
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="phone" id="phone" class="form-control" value="{{testBook.phone}}" htmlEscape="false" maxlength="32" />
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        activated_ *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="activated" id="activated" class="form-control required digits" value="{{testBook.activated}}" htmlEscape="false" maxlength="1" />
+                        <span class="m-form__help">
+							标注
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        key
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="langKey" id="langKey" class="form-control" value="{{testBook.langKey}}" htmlEscape="false" maxlength="5" />
+                        <span class="m-form__help">
+							建
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        activation_key
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="activationKey" id="activationKey" class="form-control" value="{{testBook.activationKey}}" htmlEscape="false" maxlength="20" />
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        reset_key
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="resetKey" id="resetKey" class="form-control" value="{{testBook.resetKey}}" htmlEscape="false" maxlength="20" />
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        reset_date
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <div class="input-group date m_datetimepicker" >
+                            <input class="form-control m-input" name="resetDate" readonly value="{{testBook.resetDate | date:'yyyy-MM-dd hh:mm:ss'}}" type="text" />
+                            <span class="input-group-addon">
+                                <i class="la la-calendar-check-o glyphicon-th"></i>
+                            </span>
+                        </div>
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        description_
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <textarea name="description" rows="5" maxlength="255" class="form-control input-xxlarge ">{{testBook.description}}</textarea>
+                        <span class="m-form__help">
+							
+						</span>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-success save">
+                                <i class="fa fa-check"></i> 保存
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="albedoForm.resetForm('#testBook-save-form')">
+                                重置
+                            </button>
+                            <button type="button" class="btn" onclick="window.history.back()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Portlet-->
+</div>

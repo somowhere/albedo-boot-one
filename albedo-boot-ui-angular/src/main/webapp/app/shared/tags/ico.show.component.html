@@ -1,0 +1,32 @@
+<div class="input-group">
+    <input id="{{id}}Id" class="_commonIcoId" name="{{name}}" [attr.searchItem]="searchItem"
+           [attr.attrType]="attrType"
+           [attr.operation]="operate" type="hidden" value="{{value}}"
+           [attr.disabled]="disabled"/>
+    <span id="{{id}}Name" [attr.name]="labelName"
+          onclick="albedoForm.icoSelect($(this), $(this).prev('input._commonIcoId'));"
+          readonly="readonly"
+          [attr.value]="labelValue"
+          class="{{cssClass}} _commonIcoInput form-control"
+          [attr.disabled]="disabled"
+          [attr._nameLevel]="nameLevel"
+          [attr._url]="url"
+          [attr._checked]="checked"
+          [attr._extId]="extId"
+          [attr._module]="module"
+          [attr._nodesLevel]="nodesLevel"
+          [attr._title]="title"
+          [attr._selectedValueFn]="selectedValueFn"
+          [attr._allowClear]="allowClear"
+          [attr._notAllowSelectParent]="notAllowSelectParent"
+          [attr._notAllowSelectRoot]="notAllowSelectRoot"
+          [attr._selectScopeModule]="selectScopeModule">
+    <i *ngIf="value!=null" class="fa {{value}}"></i>
+    </span>
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button"
+                onclick="albedoForm.icoSelect($(this).parent().prev('span._commonIcoInput'), $(this).parent().prevAll('input._commonIcoId'));">
+    选择
+        </button>
+    </span>
+</div>

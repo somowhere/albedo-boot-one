@@ -1,0 +1,65 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                系统日志
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+<div class="m-content">
+
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        日志列表
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            <div class="table-responsive" *ngIf="loggers">
+                <p >共有  {{ loggers.length }} 条日志.</p>
+
+                <span>过滤</span> <input type="text" [(ngModel)]="filter" class="form-control">
+
+                <table class="table m-table table-bordered table-hover">
+                    <thead>
+                    <tr title="click to order">
+                        <th (click)="orderProp = 'name'; reverse=!reverse"><span>名称</span></th>
+                        <th (click)="orderProp = 'level'; reverse=!reverse"><span>等级</span></th>
+                    </tr>
+                    </thead>
+
+                    <tr *ngFor="let logger of (loggers | pureFilter:filter:'name' | orderBy:orderProp:reverse)">
+                        <td><small>{{logger.name | slice:0:140}}</small></td>
+                        <td>
+                            <button (click)="changeLevel(logger.name, 'TRACE')" [ngClass]="(logger.level=='TRACE') ? 'btn-danger' : 'btn-light'" class="btn btn-sm">TRACE</button>
+                            <button (click)="changeLevel(logger.name, 'DEBUG')" [ngClass]="(logger.level=='DEBUG') ? 'btn-warning' : 'btn-light'" class="btn btn-sm">DEBUG</button>
+                            <button (click)="changeLevel(logger.name, 'INFO')" [ngClass]="(logger.level=='INFO') ? 'btn-info' : 'btn-light'" class="btn btn-sm">INFO</button>
+                            <button (click)="changeLevel(logger.name, 'WARN')" [ngClass]="(logger.level=='WARN') ? 'btn-success' : 'btn-light'" class="btn btn-sm">WARN</button>
+                            <button (click)="changeLevel(logger.name, 'ERROR')" [ngClass]="(logger.level=='ERROR') ? 'btn-primary' : 'btn-light'" class="btn btn-sm">ERROR</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

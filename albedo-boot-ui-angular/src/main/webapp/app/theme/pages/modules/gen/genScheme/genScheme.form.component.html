@@ -1,0 +1,249 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                方案配置管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+
+<div class="m-content">
+    <!--begin::Portlet-->
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        添加方案配置
+                        <small>
+                            数据表单
+                        </small>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <a href="#/gen/genScheme/list" title="方案配置列表" class="m-portlet__nav-link btn list btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill ">
+                    <i class="la la-th-list"></i>
+                </a>
+            </div>
+        </div>
+        <!--begin::Form-->
+        <form class="m-form m-form--label-align-right form-validation" action="{{ctx}}/gen/genScheme/" method="post" id="genScheme-save-form">
+            <input type="hidden" name="id" value="{{genScheme.id}}" />
+            <div class="m-portlet__body">
+                <div class="m-form__content bootstrap-alerts">
+
+                </div>
+
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        方案名称 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="name" value="{{genScheme.name}}"
+                               maxlength="64" class="form-control required"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        模块分类 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form name="category" cssClass="required" value="{{genScheme.category}}" [comboData]="categoryList" boxType="select" >
+                        </alb-form>
+                        <span class="m-form__help">
+							生成结构：(包名)/(模块名)/(分层(dao,entity,service,web))/(子模块名)/(java类)
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        生成包路径 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="packageName" value="{{genScheme.packageName}}"
+                               maxlength="64" class="form-control required"/>
+                        <span class="m-form__help">
+							建议模块包：com.albedo.modules.模块名
+						</span>
+                    </div>
+                </div>
+                <!--<div class="form-group m-form__group row">-->
+                    <!--<label class="col-form-label col-lg-3 col-sm-12">-->
+                        <!--页面数据加载方式-->
+                    <!--</label>-->
+                    <!--<div class="col-lg-3 col-md-9 col-sm-12">-->
+                        <!--<alb-form name="viewType" cssClass="required" value="{{genScheme.viewType}}" [comboData]="viewTypeList" boxType="select" >-->
+                        <!--</alb-form>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        生成模块名 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="moduleName" value="{{genScheme.moduleName}}"
+                               maxlength="64" class="form-control required"/>
+                        <span class="m-form__help">
+							可理解为子系统名，例如 sys
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        生成子模块名
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="subModuleName" value="{{genScheme.subModuleName}}"
+                               maxlength="64" class="form-control "/>
+                        <span class="m-form__help">
+							可选，分层下的文件夹，例如
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        生成功能描述 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="functionName" value="{{genScheme.functionName}}"
+                               maxlength="64" class="form-control required"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        生成功能名 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="functionNameSimple" value="{{genScheme.functionNameSimple}}"
+                               maxlength="64" class="form-control required"/>
+                        <span class="m-form__help">
+							用作功能提示，如：保存“某某”成功
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        生成功能作者 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="functionAuthor" value="{{genScheme.functionAuthor}}"
+                               maxlength="64" class="form-control required"/>
+                        <span class="m-form__help">
+							功能开发者
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        业务表名 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form name="genTableId" cssClass="" [dataLiveSearch]="true" value="{{genScheme.genTableId}}" [comboData]="tableList" boxType="select" >
+                        </alb-form>
+                        <span class="m-form__help">
+							生成的数据表，一对多情况下请选择主表。
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        生成选项 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <div class="m-checkbox-inline">
+                            <label class="m-checkbox">
+                                <input type="checkbox" name="genCode" value="true">
+                                是否生成代码
+                                <span></span>
+                            </label>
+                            <label class="m-checkbox">
+                                <input type="checkbox" name="replaceFile" value="true">
+                                是否替换现有文件
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        同步模块 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <div class="m-checkbox-inline">
+                            <label class="m-checkbox">
+                                <input id="syncModule" type="checkbox" name="syncModule" value="true">
+                                是否同步模块数据
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row hide" id="parentModule_div">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                       功能模块 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-tree-select id="modular"
+                                         cssClass="" allowClear="true" name="parentModuleId"
+                                         labelName="parentModuleName"
+                                         title="选择模块"
+                                         url="{{ctx}}/sys/module/findTreeData?all&type=menu" ></alb-tree-select>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        状态 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="radio"
+                                  id="status"
+                                  name="status"
+                                  dictCode="sys_status"
+                                  value="{{genScheme.status}}" cssClass="required">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                            <label class="col-form-label col-lg-3 col-sm-12">
+                                描述
+                            </label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                         <textarea class="summernote form-control" name="description"
+                                   rows="5">{{genScheme.description}}</textarea>
+                            </div>
+                        </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-success save">
+                                <i class="fa fa-check"></i> 保存
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="albedoForm.resetForm('#genScheme-save-form')">
+                                重置
+                            </button>
+                            <button type="button" class="btn" onclick="window.history.back()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Portlet-->
+</div>

@@ -1,0 +1,115 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                业务表管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+<div class="m-content">
+
+	<div class="m-portlet m-portlet--mobile">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						数据列表
+					</h3>
+				</div>
+			</div>
+            <div class="m-portlet__head-tools">
+                <a  *ngIf="this.principal.hasAnyAuthorityDirectOne('gen_genTable_edit')" title="添加业务表" class="m-portlet__nav-link btn btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill btn-add-genTable">
+                    <i class="la la-plus"></i>
+                </a>
+            </div>
+		</div>
+		<div class="m-portlet__body">
+			<!--begin: Search Form -->
+			<div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 search-form" id="genTable-search-form">
+				<div class="row align-items-center">
+					<div class="col-xl-8 order-2 order-xl-1">
+						<div class="form-group m-form__group row align-items-center">
+							<div class="col-md-4">
+								<div class="m-form__group m-form__group--inline">
+									<div class="m-form__label">
+										<label class="m-label m-label--single">
+											表名:
+										</label>
+									</div>
+									<div class="m-form__control">
+                                        <input type="text" name="name" searchItem="searchItem" class="form-control m-input" />
+									</div>
+								</div>
+								<div class="d-md-none m--margin-bottom-10"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                        <button id="table-form-search-genTable" class="btn m-btn--pill m-btn--air btn-primary btn-sm m-btn m-btn--custom search-form-btn filter-submit-table-genTable" type="button">
+                            查询
+                        </button>
+						<div class="m-separator m-separator--dashed d-xl-none"></div>
+					</div>
+				</div>
+			</div>
+			<!--end: Search Form -->  		<!--begin: Datatable -->
+			<div class="m_datatable" id="data-table-genTable"></div>
+			<!--end: Datatable -->
+		</div>
+
+	</div>
+    <!-- END EXAMPLE TABLE PORTLET-->
+    <!--begin::Modal-->
+    <div id="genTable-dialog-before" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        选择业务表
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">
+							&times;
+						</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="bootstrap-alerts"></div>
+                    <form id="genTable-form-before" class="form-horizontal form-validation">
+                        <div class="form-group m-form__group row">
+                            <label class="col-form-label col-lg-3 col-sm-12">
+                                表名 *
+                            </label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <alb-form id="name" name="name" cssClass="required" [dataLiveSearch]="true" url="{{ctx}}/gen/genTable/tableList" boxType="select"></alb-form>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        关闭
+                    </button>
+                    <button type="button" class="btn btn-primary confirm-modal">
+                        确认
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal-->
+</div>
+

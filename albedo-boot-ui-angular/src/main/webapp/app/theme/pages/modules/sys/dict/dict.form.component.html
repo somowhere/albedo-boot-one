@@ -1,0 +1,170 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                字典管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+
+<div class="m-content">
+    <!--begin::Portlet-->
+    <div class="m-portlet">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        添加字典
+                        <small>
+                            数据表单
+                        </small>
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <a href="#/sys/dict/list" title="字典列表" class="m-portlet__nav-link btn list btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill ">
+                    <i class="la la-th-list"></i>
+                </a>
+            </div>
+        </div>
+        <!--begin::Form-->
+        <form class="m-form m-form--fit m-form--label-align-right form-validation" action="{{ctx}}/sys/dict/" method="post" id="dict-save-form">
+            <input type="hidden" name="id" value="{{dict.id}}" />
+            <div class="m-portlet__body">
+                <div class="m-form__content bootstrap-alerts">
+
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        上级字典 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-tree-select id="dict"
+                             cssClass="required" allowClear="true" name="parentId"
+                             value="{{dict.parentId}}" labelName="parentName"
+                             labelValue="{{dict.parentName}}" title="上级字典"
+                             url="{{ctx}}/dataSystem/dict/findTreeData" ></alb-tree-select>
+
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        名称 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="name" value="{{dict.name}}"
+                               maxlength="64" class="form-control required"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        编码 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="code" value="{{dict.code}}"
+                               maxlength="64" class="form-control required"/>
+                        <span class="m-form__help">
+							唯一
+						</span>
+                    </div>
+                </div>
+
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        键
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="key" value="{{dict.key}}"
+                               maxlength="64" class="form-control"/>
+                        <span class="m-form__help">
+
+						</span>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        值
+                    </label>
+                    <div class="col-lg-9 col-md-9 col-sm-12">
+                         <textarea class="form-control" name="val"
+                                   rows="5">{{dict.val}}</textarea>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        是否显示 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="radio"
+                                  id="isShow"
+                                  name="isShow"
+                                  dictCode="sys_yes_no"
+                                  value="{{dict.isShow}}" cssClass="required">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        序号 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <input type="text" name="sort" value="{{dict.sort}}"
+                               maxlength="11" class="form-control digits"/>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        状态 *
+                    </label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <alb-form boxType="radio"
+                                  id="status"
+                                  name="status"
+                                  dictCode="sys_status"
+                                  value="{{dict.status}}" cssClass="required">
+                        </alb-form>
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+                    <label class="col-form-label col-lg-3 col-sm-12">
+                        描述
+                    </label>
+                    <div class="col-lg-9 col-md-9 col-sm-12">
+                         <textarea class="form-control" name="description"
+                                   rows="5">{{dict.description}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions m-form__actions">
+                    <div class="row">
+                        <div class="col-lg-9 ml-lg-auto">
+                            <button type="button" class="btn btn-success save">
+                                <i class="fa fa-check"></i> 保存
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="albedoForm.resetForm('#dict-save-form')">
+                                重置
+                            </button>
+                            <button type="button" class="btn" onclick="window.history.back()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Portlet-->
+</div>

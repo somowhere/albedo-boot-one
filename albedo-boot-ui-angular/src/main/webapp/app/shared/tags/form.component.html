@@ -1,0 +1,29 @@
+<select *ngIf="boxType == 'select'" id="{{id}}"
+        name="{{name}}"
+        [attr.searchItem]="searchItem"
+        [attr.attrType]="attrType"
+        [attr.operate]="operate"
+        [attr.analytiColumn]="analytiColumn"
+        [attr.multiple]="multiple"
+        [attr.analytiColumnPrefix]="analytiColumnPrefix"
+        class="form-control m-bootstrap-select {{cssClass}}" [attr.data-live-search]="dataLiveSearch">
+    <option *ngIf="!cssClass || cssClass.indexOf('required')==-1" value="">请选择...</option>
+    <option *ngFor="let item of comboData" value="{{item.id}}" selected="{{equleValue(item.id) ? 'selected' : ''}}">{{item.name}}</option>
+</select>
+
+<div *ngIf="boxType == 'radio' || boxType == 'checkbox' " class="m-{{boxType}}-inline">
+    <label *ngFor="let item of comboData; index as i; " class="m-{{boxType}} " (click)="changeVal()">
+        <input type="{{boxType}}" id="{{id}}{{i}}"
+            name="{{name}}" value="{{item.id}}"
+            [attr.searchItem]="searchItem"
+            [attr.attrType]="attrType"
+            [attr.operate]="operate"
+            [attr.analytiColumn]="analytiColumn"
+            [attr.analytiColumnPrefix]="analytiColumnPrefix"
+               [attr.itemLabel]="itemLabel"
+               [attr.itemValue]="itemValue"
+               [attr.data-options]="dataOptions"
+               class="form-control {{cssClass}}"
+               checked="{{equleValue(item.id) ? 'checked' : ''}}" />{{item.name}}<span></span></label>
+
+</div>

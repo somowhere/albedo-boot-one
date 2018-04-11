@@ -1,0 +1,74 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                服务状态
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+<div class="m-content">
+
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        数据列表
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <button class="btn btn-primary float-right" (click)="refresh()">
+                    <span class="fa fa-refresh"></span> <span >刷新</span>
+                </button>
+            </div>
+        </div>
+        <div class="m-portlet__body">
+
+            <div>
+                <div class="table-responsive">
+                    <table id="healthCheck" class="table m-table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>服务名称</th>
+                                <th class="text-center">状态</th>
+                                <th class="text-center">详细情况</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let health of healthData">
+                                <td>{{baseName(health.name)}} {{subSystemName(health.name)}}</td>
+                                <td class="text-center">
+                                    <span class="badge" [ngClass]="getBadgeClass(health.status.code)">
+                                        {{health.status.code}}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <a class="hand" (click)="showHealth(health)" *ngIf="health.details || health.error">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

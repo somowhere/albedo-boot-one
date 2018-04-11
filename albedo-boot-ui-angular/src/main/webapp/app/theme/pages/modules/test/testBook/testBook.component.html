@@ -1,0 +1,86 @@
+<!-- BEGIN: Subheader -->
+<div class="m-subheader">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title">
+                测试书籍管理
+            </h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+
+<div class="m-content">
+
+	<div class="m-portlet m-portlet--mobile">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						数据列表
+					</h3>
+				</div>
+			</div>
+            <div class="m-portlet__head-tools">
+                <a *ngIf="this.principal.hasAnyAuthorityDirectOne('test_testBook_edit') "routerLink="/test/testBook/form/" title="添加测试书籍" class="m-portlet__nav-link btn btn-lg btn-outline-primary m-btn m-btn--outline-1x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill ">
+                    <i class="la la-plus"></i>
+                </a>
+            </div>
+		</div>
+		<div class="m-portlet__body">
+			<!--begin: Search Form -->
+			<div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30 search-form" id="testBook-search-form">
+				<div class="row align-items-center">
+					<div class="col-xl-8 order-2 order-xl-1">
+						<div class="form-group m-form__group row align-items-center">
+						    <div class="col-md-3 m--margin-bottom-20">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        <label class="m-label m-label--single">
+                                            标题
+                                        </label>
+                                    </div>
+                                    <div class="m-form__control">
+                                        <input type="text" class="form-control m-input" searchItem="searchItem" id="title" name="title" operate="like" htmlEscape="false" maxlength="32" placeholder="..." />
+                                    </div>
+                                </div>
+                                <div class="d-md-none m--margin-bottom-10"></div>
+							</div>
+						    <div class="col-md-3 m--margin-bottom-20">
+                                <div class="m-form__group m-form__group--inline">
+                                    <div class="m-form__label">
+                                        <label class="m-label m-label--single">
+                                            名称
+                                        </label>
+                                    </div>
+                                    <div class="m-form__control">
+                                        <input type="text" class="form-control m-input" searchItem="searchItem" id="name" name="name" operate="like" htmlEscape="false" maxlength="50" placeholder="..." />
+                                    </div>
+                                </div>
+                                <div class="d-md-none m--margin-bottom-10"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                        <button id="table-form-search-testBook" class="btn m-btn--pill m-btn--air btn-primary btn-sm m-btn m-btn--custom search-form-btn filter-submit-table-testBook" type="button">
+                            查询
+                        </button>
+						<div class="m-separator m-separator--dashed d-xl-none"></div>
+					</div>
+				</div>
+			</div>
+			<!--end: Search Form -->  		<!--begin: Datatable -->
+			<div class="m_datatable" id="data-table-testBook"></div>
+			<!--end: Datatable -->
+		</div>
+	</div>
+</div>
