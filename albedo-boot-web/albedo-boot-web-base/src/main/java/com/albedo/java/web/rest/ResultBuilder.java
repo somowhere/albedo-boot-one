@@ -2,7 +2,6 @@ package com.albedo.java.web.rest;
 
 import com.albedo.java.util.PublicUtil;
 import com.albedo.java.util.domain.CustomMessage;
-import com.albedo.java.web.rest.util.PaginationUtil;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
